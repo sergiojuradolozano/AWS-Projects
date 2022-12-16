@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+<html style="font-size: 16px;" lang="en"><head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="utf-8">
+    <meta name="keywords" content="">
+    <meta name="description" content="">
+    <title>Backup Automation</title>
+    <link rel="stylesheet" href="nicepage.css" media="screen">
+<link rel="stylesheet" href="Backup-Automation.css" media="screen">
+    <script class="u-script" type="text/javascript" src="jquery.js" defer=""></script>
+    <script class="u-script" type="text/javascript" src="nicepage.js" defer=""></script>
+    <meta name="generator" content="Nicepage 5.0.7, nicepage.com">
+    <link id="u-theme-google-font" rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,500,500i,600,600i,700,700i,800,800i|Barlow:100,100i,200,200i,300,300i,400,400i,500,500i,600,600i,700,700i,800,800i,900,900i">
+    <link id="u-page-google-font" rel="stylesheet" href="https://fonts.googleapis.com/css?family=Merriweather:300,300i,400,400i,700,700i,900,900i">
+    
+    
+    
+    
+    
+    
+    
+    
+    <script type="application/ld+json">{
+		"@context": "http://schema.org",
+		"@type": "Organization",
+		"name": "Production",
+		"logo": "images/logo-no-background.svg"
+}</script>
+    <meta name="theme-color" content="#29b7dd">
+    <meta property="og:title" content="Backup Automation">
+    <meta property="og:description" content="">
+    <meta property="og:type" content="website">
+  </head>
+  <body class="u-body u-overlap u-overlap-contrast u-xl-mode" data-lang="en"><header class="u-clearfix u-header" id="sec-2485" data-animation-name="" data-animation-duration="0" data-animation-delay="0" data-animation-direction=""><div class="u-clearfix u-sheet u-sheet-1">
+        <a href="Home.html" class="u-image u-logo u-image-1" data-image-width="1000" data-image-height="625" title="Home" rel="nofollow">
+          <img src="images/logo-no-background.svg" class="u-logo-image u-logo-image-1">
+        </a>
+        <nav class="u-menu u-menu-dropdown u-offcanvas u-menu-1" data-responsive-from="MD" data-position="">
+          <div class="menu-collapse u-custom-font u-font-merriweather" style="font-size: 1rem; letter-spacing: 0px; text-transform: uppercase; font-weight: 700;">
+            <a class="u-button-style u-custom-active-border-color u-custom-border u-custom-border-color u-custom-borders u-custom-color u-custom-hover-border-color u-custom-left-right-menu-spacing u-custom-padding-bottom u-custom-text-active-color u-custom-text-color u-custom-text-hover-color u-custom-top-bottom-menu-spacing u-nav-link u-text-active-palette-1-base u-text-hover-palette-2-base u-text-white" href="#">
+              <svg class="u-svg-link" viewBox="0 0 24 24"><use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#menu-hamburger"></use></svg>
+              <svg class="u-svg-content" version="1.1" id="menu-hamburger" viewBox="0 0 16 16" x="0px" y="0px" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns="http://www.w3.org/2000/svg"><g><rect y="1" width="16" height="2"></rect><rect y="7" width="16" height="2"></rect><rect y="13" width="16" height="2"></rect>
+</g></svg>
+            </a>
+          </div>
+          <div class="u-custom-menu u-nav-container" wfd-invisible="true">
+            <ul class="u-custom-font u-font-merriweather u-nav u-spacing-100 u-unstyled u-nav-1"><li class="u-nav-item"><a class="u-border-active-palette-5-light-3 u-border-hover-palette-5-light-3 u-button-style u-nav-link u-text-active-white u-text-hover-white" href="Home.html" rel="nofollow" style="padding: 10px 0px;">Home</a>
+</li><li class="u-nav-item"><a class="u-border-active-palette-5-light-3 u-border-hover-palette-5-light-3 u-button-style u-nav-link u-text-active-white u-text-hover-white" style="padding: 10px 0px;">Projects</a><div class="u-nav-popup"><ul class="u-custom-font u-font-merriweather u-h-spacing-20 u-nav u-unstyled u-v-spacing-10 u-nav-2"><li class="u-nav-item"><a class="u-button-style u-nav-link" href="Static-Website-with-EC2.html">Static Website with EC2</a>
+</li><li class="u-nav-item"><a class="u-button-style u-nav-link" href="Static-Website-with-S3.html">Static Website with S3</a>
+</li><li class="u-nav-item"><a class="u-button-style u-nav-link" href="Backup-Automation.html">Backup Automation</a>
+</li><li class="u-nav-item"><a class="u-button-style u-nav-link" href="Hands-on-Projects.html">AWS Hands-on Videos</a>
+</li></ul>
+</div>
+</li><li class="u-nav-item"><a class="u-border-active-palette-5-light-3 u-border-hover-palette-5-light-3 u-button-style u-nav-link u-text-active-white u-text-hover-white" href="https://www.linkedin.com/in/sergiojuradolozano/" target="_blank" style="padding: 10px 0px;">Say hi on LinkedIn</a>
+</li></ul>
+          </div>
+          <div class="u-custom-menu u-nav-container-collapse">
+            <div class="u-black u-container-style u-inner-container-layout u-opacity u-opacity-95 u-sidenav">
+              <div class="u-inner-container-layout u-sidenav-overflow">
+                <div class="u-menu-close"></div>
+                <ul class="u-align-center u-nav u-popupmenu-items u-unstyled u-nav-3"><li class="u-nav-item"><a class="u-button-style u-nav-link" href="Home.html" rel="nofollow">Home</a>
+</li><li class="u-nav-item"><a class="u-button-style u-nav-link">Projects</a><div class="u-nav-popup"><ul class="u-custom-font u-font-merriweather u-h-spacing-20 u-nav u-unstyled u-v-spacing-10 u-nav-4"><li class="u-nav-item"><a class="u-button-style u-nav-link" href="Static-Website-with-EC2.html">Static Website with EC2</a>
+</li><li class="u-nav-item"><a class="u-button-style u-nav-link" href="Static-Website-with-S3.html">Static Website with S3</a>
+</li><li class="u-nav-item"><a class="u-button-style u-nav-link" href="Backup-Automation.html">Backup Automation</a>
+</li><li class="u-nav-item"><a class="u-button-style u-nav-link" href="Hands-on-Projects.html">AWS Hands-on Videos</a>
+</li></ul>
+</div>
+</li><li class="u-nav-item"><a class="u-button-style u-nav-link" href="https://www.linkedin.com/in/sergiojuradolozano/" target="_blank">Say hi on LinkedIn</a>
+</li></ul>
+              </div>
+            </div>
+            <div class="u-black u-menu-overlay u-opacity u-opacity-70" wfd-invisible="true"></div>
+          </div>
+        </nav>
+      </div></header>
+    <section class="u-align-left u-clearfix u-image u-shading u-section-1" id="sec-d0b0" data-image-width="1280" data-image-height="800">
+      <div class="u-clearfix u-sheet u-sheet-1">
+        <div class="u-align-center u-clearfix u-expanded-width-xs u-layout-wrap u-layout-wrap-1">
+          <div class="u-gutter-0 u-layout">
+            <div class="u-layout-row">
+              <div class="u-align-left u-container-style u-layout-cell u-left-cell u-shape-rectangle u-size-60 u-layout-cell-1">
+                <div class="u-container-layout u-container-layout-1">
+                  <h1 class="u-align-center u-custom-font u-font-merriweather u-text u-text-1">Bash script for&nbsp;<br>Backup Automation
+                  </h1>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+    <section class="u-clearfix u-container-align-center u-lightbox u-palette-4-light-3 u-section-2" id="carousel_e6f6">
+      <div class="u-clearfix u-sheet u-sheet-1">
+        <div class="u-clearfix u-expanded-width u-layout-wrap u-layout-wrap-1">
+          <div class="u-layout">
+            <div class="u-layout-row">
+              <div class="u-container-style u-layout-cell u-size-30 u-layout-cell-1">
+                <div class="u-container-layout u-valign-bottom u-container-layout-1">
+                  <h5 class="u-text u-text-default u-text-1">The Power of Automation</h5>
+                  <p class="u-large-text u-text u-text-default u-text-variant u-text-2"> The importance of data management in today's world is crucial for businesses from an operational and strategic point of view. According to ScienceDaily (2013), 90% of the world's data was created in the last two years (click <span style="font-weight: 700;">
+                      <a href="https://www.sciencedaily.com/releases/2013/05/130522085217.htm" class="u-active-none u-border-none u-btn u-button-link u-button-style u-hover-none u-none u-text-body-color u-btn-1" target="_blank">he<span style="font-weight: 700;"></span>re
+                      </a>
+                    </span> to view the publication). On the other hand, cyberattacks remain prevalent, disrupting businesses. Backups, as a way to "go back in time", remain a powerful aspect of a data recovery plan. In the following lines of code represent a bash script for backup automation that requires 2 arguments: the directory in which the files within it will be backed up, and the directory to where the backup will be sent. This could be very useful when saving changes in a file where several people collaborate. Having multiple versions of a file could be slightly similar to having version control. Indeed, this could serve as an extra layer of security. With the crontab command, this script can be scheduled to run every 24 hours, for instance.
+                  </p>
+                </div>
+              </div>
+              <div class="u-container-style u-effect-hover-zoom u-image-contain u-layout-cell u-size-30 u-layout-cell-2" data-image-width="1200" data-image-height="1020">
+                <div class="u-background-effect u-expanded">
+                  <div class="u-background-effect-image u-expanded u-image u-image-contain u-image-1" data-image-width="1200" data-image-height="1020"></div>
+                </div>
+                <div class="u-container-layout u-valign-top-sm u-valign-top-xs u-container-layout-2"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+    <section class="u-clearfix u-palette-4-light-3 u-section-3" id="sec-f317">
+      <div class="u-clearfix u-sheet u-sheet-1">
+        <div class="u-align-left-xs u-container-style u-expanded-width u-group u-palette-4-light-3 u-group-1">
+          <div class="u-container-layout u-container-layout-1">
+            <h5 class="u-align-center-lg u-align-center-md u-align-center-sm u-align-center-xl u-text u-text-default u-text-1">The backup script</h5>
+            <p class="u-align-center-lg u-align-center-md u-align-center-sm u-align-center-xl u-large-text u-text u-text-default u-text-variant u-text-2"> Read the comments to follow along the script.&nbsp;</p>
+          </div>
+        </div>
+      </div>
+    </section>
+    <section class="u-clearfix u-palette-4-light-3 u-section-4" id="sec-69b9">
+      <div class="u-clearfix u-sheet u-sheet-1">
+        <div class="u-black u-container-align-left-lg u-container-align-left-md u-container-align-left-sm u-container-align-left-xl u-container-style u-expanded-width-xs u-group u-group-1">
+          <div class="u-container-layout u-valign-middle-xs u-container-layout-1">
+            <p class="u-align-left u-large-text u-text u-text-default u-text-variant u-text-1">
+              <span class="u-text-white"> #!/bin/bash</span>
+              <br>
+              <br>
+              <span class="u-text-custom-color-1"># This checks if the number of arguments is correct</span>
+              <br>
+              <span class="u-text-custom-color-1"># If the number of arguments is incorrect ( $# != 2) print error message and exit</span>
+              <br>
+              <br>if [[ $# != 2 ]]<br>then<br> echo "backup.sh target_directory_name destination_directory_name"<br> exit<br>fi<br>
+              <br>
+              <span class="u-text-custom-color-1"># This checks if a​rgument 1 and argument 2 are valid directory paths</span>
+              <br>if [[ ! -d $1 ]] || [[ ! -d $2 ]]<br>then<br> echo "Invalid directory path provided"<br> exit<br>fi<br>
+              <br>
+              <span class="u-text-custom-color-1"># Setting 2 Variables equal to the values of the first and second command line arguments</span>
+              <br>targetDirectory=$1<br>destinationDirectory=$2<br>
+              <br>
+              <span class="u-text-custom-color-1"># Display the Values</span>
+              <br>echo "Target directory: $targetDirectory"<br>echo "Backup destination: $destinationDirectory"<br>
+              <br>
+              <span class="u-text-custom-color-1"># Define a variable called currentTS as the current timestamp, expressed in seconds</span>
+              <br>currentTS=`date +%s`<br>
+              <br>
+              <span class="u-text-custom-color-1"># Define a variable called backupFileName to store the name of the archived and compressed backup file that the script will create</span>
+              <br>backupFileName="backup-$currentTS.tar.gz"<br>
+              <br>
+              <span class="u-text-custom-color-1"># Define a variable called origAbsPath with the absolute path of the current directory as the variable’s value.</span>
+              <br>origAbsPath=`pwd`<br>
+              <br>
+              <span class="u-text-custom-color-1"># Define a variable called destAbsPath with value equal to the absolute path of the destination directory.</span>
+              <br>cd $destinationDirectory <span class="u-text-custom-color-1"># changing to destination directory</span>
+              <br>destAbsPath=`pwd`<br>
+              <br>
+              <span class="u-text-custom-color-1"># Change directories from the current working directory to the target directory targetDirectory.</span>
+              <br>cd $origAbsPath <span class="u-text-custom-color-1"># &lt;- changing to original directory</span>
+              <br>cd $targetDirectory <span class="u-text-custom-color-1"># &lt;- changing to the target directory</span>
+              <br>
+              <br>
+              <span class="u-text-custom-color-1"># Define a numerical variable called yesterdayTS as the timestamp (in seconds) 24 hours prior to the current</span> timestamp, currentTS<br>yesterdayTS=$(($currentTS - 24 * 60 * 60))<br>
+              <br>
+              <span class="u-text-custom-color-1"># Declaring a Variable called toBackup</span>
+              <br>declare -a toBackup<br>
+              <br>for file in $(ls -a) # Listing all files and directories<br>do<br>
+              <span class="u-text-custom-color-1"> # if statement to check whether the $file was modified within the last 24 hours</span>
+              <br> if ((`date -r $file +%s` &gt; $yesterdayTS))<br> then<br> toBackup+=($file) <span class="u-text-custom-color-1"># adding the $file that was updated in the past 24-hours to the toBackup array.</span>
+              <br> fi<br>done<br>
+              <br>
+              <span class="u-text-custom-color-1"># Compressing and archiving the files, using the $toBackup array of filenames, to a file with the name</span> backupFileName.<br>tar -czvf $backupFileName ${toBackup[@]}<br>
+              <br>
+              <span class="u-text-custom-color-1"># Moving the file backupFileName to the destination directory located at destAbsPath</span>
+              <br>mv $backupFileName $destAbsPath<br>
+              <br>echo "Done!"<br>
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+    <section class="u-clearfix u-palette-4-light-3 u-section-5" id="sec-3365">
+      <div class="u-clearfix u-sheet u-valign-middle-xs u-sheet-1">
+        <div class="u-container-style u-expanded-width u-group u-palette-4-light-3 u-group-1">
+          <div class="u-container-layout u-container-layout-1">
+            <h5 class="u-align-center u-text u-text-default u-text-1">Backup automation</h5>
+            <p class="u-align-center u-large-text u-text u-text-variant u-text-2">In the following example , the crontab command will be used to automate the script.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+    <section class="u-clearfix u-lightbox u-palette-4-light-3 u-section-6" id="sec-4332">
+      <div class="u-clearfix u-sheet u-sheet-1">
+        <div class="u-container-style u-expanded-width u-group u-group-1">
+          <div class="u-container-layout u-valign-top-lg u-valign-top-md u-valign-top-sm u-valign-top-xl u-container-layout-1">
+            <div class="u-black u-border-3 u-border-black u-container-style u-expanded-width-xs u-group u-group-2">
+              <div class="u-container-layout u-valign-middle-xs u-container-layout-2">
+                <p class="u-large-text u-text u-text-custom-color-1 u-text-default u-text-variant u-text-1"> # ​The script needs to be copied to the ​bin directory to be executed across different directories.<br>
+                  <span class="u-text-white">sudo cp /path/to/profit /usr/local/bin&nbsp;&nbsp;</span>
+                  <br># Open crontab<br>
+                  <span class="u-text-white">crontab -e</span>
+                  <br> # Adding the crontab task<br># in this example, the backup will be executed every every day at 00:00h<br>#/home/target represent the target directory&nbsp;<br>#/home/dest represents the destination directory<br>
+                  <span class="u-text-white">0 0 * * * /usr/local/bin/backup.sh /home/target /home/dest</span>
+                  <br># Save the crontab<br># Start crontab<br>
+                  <span class="u-text-white">sudo service cron start</span>
+                  <br># The crontab is up and running!
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+    <section class="u-clearfix u-palette-4-light-3 u-section-7" id="sec-9014">
+      <div class="u-clearfix u-sheet u-sheet-1">
+        <h1 class="u-custom-font u-font-merriweather u-text u-text-default u-title u-text-1">Say hi</h1>
+        <div class="u-clearfix u-expanded-width u-layout-wrap u-layout-wrap-1">
+          <div class="u-layout">
+            <div class="u-layout-row">
+              <div class="u-container-style u-hidden-xs u-image u-image-contain u-layout-cell u-size-30 u-image-1" data-image-width="5472" data-image-height="3648">
+                <div class="u-container-layout u-container-layout-1"></div>
+              </div>
+              <div class="u-container-style u-layout-cell u-size-30 u-layout-cell-2">
+                <div class="u-container-layout u-container-layout-2">
+                  <h1 class="u-custom-font u-font-merriweather u-text u-text-2">sergiojuradolozano@hotmail.com</h1>
+                  <p class="u-large-text u-text u-text-default u-text-variant u-text-3"> Fun fact! I turned my old Windows laptop back to life with Ubuntu. Working on this project with it brought back many memories from the past as this was my first ever laptop.<br>
+                    <br>What do you think of this automation? I invite you to share your thoughts with me on LinkedIn or by email.&nbsp;
+                  </p>
+                  <div class="u-align-center u-clearfix u-group-elements u-group-elements-1">
+                    <div class="u-social-icons u-spacing-10 u-social-icons-1">
+                      <a class="u-social-url" target="_blank" data-type="LinkedIn" title="LinkedIn" href="https://www.linkedin.com/in/sergiojuradolozano/"><span class="u-icon u-social-icon u-social-linkedin u-text-palette-4-base u-icon-1"><svg class="u-svg-link" preserveAspectRatio="xMidYMin slice" viewBox="0 0 112 112" style=""><use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#svg-6532"></use></svg><svg class="u-svg-content" viewBox="0 0 112 112" x="0" y="0" id="svg-6532"><circle fill="currentColor" cx="56.1" cy="56.1" r="55"></circle><path fill="#FFFFFF" d="M41.3,83.7H27.9V43.4h13.4V83.7z M34.6,37.9L34.6,37.9c-4.6,0-7.5-3.1-7.5-7c0-4,3-7,7.6-7s7.4,3,7.5,7
+            C42.2,34.8,39.2,37.9,34.6,37.9z M89.6,83.7H76.2V62.2c0-5.4-1.9-9.1-6.8-9.1c-3.7,0-5.9,2.5-6.9,4.9c-0.4,0.9-0.4,2.1-0.4,3.3v22.5
+            H48.7c0,0,0.2-36.5,0-40.3h13.4v5.7c1.8-2.7,5-6.7,12.1-6.7c8.8,0,15.4,5.8,15.4,18.1V83.7z"></path></svg></span>
+                      </a>
+                    </div>
+                    <div class="u-social-icons u-spacing-10 u-social-icons-2">
+                      <a class="u-social-url" target="_blank" data-type="LinkedIn" title="GitHub" href="https://github.com/sergiojuradolozano"><span class="u-file-icon u-icon u-social-icon u-social-linkedin u-text-palette-4-base u-icon-2"><img src="images/5.png" alt=""></span>
+                      </a>
+                    </div>
+                  </div>
+                  <div class="u-clearfix u-group-elements u-group-elements-2">
+                    <p class="u-large-text u-text u-text-variant u-text-4">Sergio Jurado Lozano</p>
+                    <p class="u-large-text u-text u-text-default u-text-variant u-text-5"><span class="u-file-icon u-icon"><img src="np://user.desktop.nicepage.com/Site_523002721/images/3177361.png" alt=""></span>London, UK
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+    
+    
+    <footer class="u-clearfix u-footer u-palette-4-light-3" id="sec-2692"><div class="u-clearfix u-sheet u-sheet-1">
+        <a href="https://nicepage.com" class="u-align-center-xs u-image u-logo u-image-1" data-image-width="1000" data-image-height="625">
+          <img src="images/logo-no-background.svg" class="u-logo-image u-logo-image-1">
+        </a>
+      </div></footer><span style="height: 64px; width: 64px; margin-left: 0px; margin-right: auto; margin-top: 0px; background-image: none; right: 65px; bottom: 55px; padding: 15px;" class="u-back-to-top u-hidden-xs u-icon u-icon-circle u-opacity u-opacity-85 u-palette-4-base" data-href="#">
+        <svg class="u-svg-link" preserveAspectRatio="xMidYMin slice" viewBox="0 0 551.13 551.13"><use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#svg-1d98"></use></svg>
+        <svg class="u-svg-content" enable-background="new 0 0 551.13 551.13" viewBox="0 0 551.13 551.13" xmlns="http://www.w3.org/2000/svg" id="svg-1d98"><path d="m275.565 189.451 223.897 223.897h51.668l-275.565-275.565-275.565 275.565h51.668z"></path></svg>
+    </span>
+  
+</body></html>

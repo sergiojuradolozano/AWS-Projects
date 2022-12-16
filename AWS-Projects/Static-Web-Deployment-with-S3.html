@@ -1,0 +1,502 @@
+<!DOCTYPE html>
+<html style="font-size: 16px;" lang="en"><head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="utf-8">
+    <meta name="keywords" content="">
+    <meta name="description" content="">
+    <title>Static Web Deployment with S3</title>
+    <link rel="stylesheet" href="nicepage.css" media="screen">
+<link rel="stylesheet" href="Static-Web-Deployment-with-S3.css" media="screen">
+    <script class="u-script" type="text/javascript" src="jquery.js" defer=""></script>
+    <script class="u-script" type="text/javascript" src="nicepage.js" defer=""></script>
+    <meta name="generator" content="Nicepage 5.0.7, nicepage.com">
+    <link id="u-theme-google-font" rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,500,500i,600,600i,700,700i,800,800i|Barlow:100,100i,200,200i,300,300i,400,400i,500,500i,600,600i,700,700i,800,800i,900,900i">
+    <link id="u-page-google-font" rel="stylesheet" href="https://fonts.googleapis.com/css?family=Merriweather:300,300i,400,400i,700,700i,900,900i|Montserrat:100,100i,200,200i,300,300i,400,400i,500,500i,600,600i,700,700i,800,800i,900,900i">
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    <script type="application/ld+json">{
+		"@context": "http://schema.org",
+		"@type": "Organization",
+		"name": "Production",
+		"logo": "images/logo-no-background.svg"
+}</script>
+    <meta name="theme-color" content="#29b7dd">
+    <meta property="og:title" content="Static Web Deployment with S3">
+    <meta property="og:description" content="">
+    <meta property="og:type" content="website">
+  </head>
+  <body class="u-body u-overlap u-overlap-contrast u-xl-mode" data-lang="en"><header class="u-clearfix u-header" id="sec-2485" data-animation-name="" data-animation-duration="0" data-animation-delay="0" data-animation-direction=""><div class="u-clearfix u-sheet u-sheet-1">
+        <a href="https://nicepage.com" class="u-image u-logo u-image-1" data-image-width="1000" data-image-height="625">
+          <img src="images/logo-no-background.svg" class="u-logo-image u-logo-image-1">
+        </a>
+        <nav class="u-menu u-menu-dropdown u-offcanvas u-menu-1" data-responsive-from="MD">
+          <div class="menu-collapse u-custom-font u-font-merriweather" style="font-size: 1rem; letter-spacing: 0px; text-transform: uppercase; font-weight: 700;">
+            <a class="u-button-style u-custom-active-border-color u-custom-border u-custom-border-color u-custom-borders u-custom-color u-custom-hover-border-color u-custom-left-right-menu-spacing u-custom-padding-bottom u-custom-text-active-color u-custom-text-color u-custom-text-hover-color u-custom-top-bottom-menu-spacing u-nav-link u-text-active-palette-1-base u-text-hover-palette-2-base u-text-white" href="#">
+              <svg class="u-svg-link" viewBox="0 0 24 24"><use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#menu-hamburger"></use></svg>
+              <svg class="u-svg-content" version="1.1" id="menu-hamburger" viewBox="0 0 16 16" x="0px" y="0px" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns="http://www.w3.org/2000/svg"><g><rect y="1" width="16" height="2"></rect><rect y="7" width="16" height="2"></rect><rect y="13" width="16" height="2"></rect>
+</g></svg>
+            </a>
+          </div>
+          <div class="u-custom-menu u-nav-container" wfd-invisible="true">
+            <ul class="u-custom-font u-font-merriweather u-nav u-spacing-100 u-unstyled u-nav-1"><li class="u-nav-item"><a class="u-border-active-palette-5-light-3 u-border-hover-palette-5-light-3 u-button-style u-nav-link u-text-active-white u-text-hover-white" href="Home.html" rel="nofollow" style="padding: 10px 0px;">Home</a>
+</li><li class="u-nav-item"><a class="u-border-active-palette-5-light-3 u-border-hover-palette-5-light-3 u-button-style u-nav-link u-text-active-white u-text-hover-white" style="padding: 10px 0px;">Projects</a><div class="u-nav-popup"><ul class="u-custom-font u-font-merriweather u-h-spacing-20 u-nav u-unstyled u-v-spacing-10 u-nav-2"><li class="u-nav-item"><a class="u-button-style u-nav-link" href="WordPress-with-AWS.html">Wordpress with RDS</a>
+</li><li class="u-nav-item"><a class="u-button-style u-nav-link" href="Static-Web-Deployment-with-S3.html">Static Web with S3</a>
+</li><li class="u-nav-item"><a class="u-button-style u-nav-link" href="Backup-Automation.html">Backup Automation</a>
+</li><li class="u-nav-item"><a class="u-button-style u-nav-link" href="Hands-on-Projects.html">Hands-on Projects</a>
+</li></ul>
+</div>
+</li><li class="u-nav-item"><a class="u-border-active-palette-5-light-3 u-border-hover-palette-5-light-3 u-button-style u-nav-link u-text-active-white u-text-hover-white" href="https://www.linkedin.com/in/sergiojuradolozano/" target="_blank" style="padding: 10px 0px;">Say hi on LinkedIn</a>
+</li></ul>
+          </div>
+          <div class="u-custom-menu u-nav-container-collapse">
+            <div class="u-black u-container-style u-inner-container-layout u-opacity u-opacity-95 u-sidenav">
+              <div class="u-inner-container-layout u-sidenav-overflow">
+                <div class="u-menu-close"></div>
+                <ul class="u-align-center u-nav u-popupmenu-items u-unstyled u-nav-3"><li class="u-nav-item"><a class="u-button-style u-nav-link" href="Home.html" rel="nofollow">Home</a>
+</li><li class="u-nav-item"><a class="u-button-style u-nav-link">Projects</a><div class="u-nav-popup"><ul class="u-custom-font u-font-merriweather u-h-spacing-20 u-nav u-unstyled u-v-spacing-10 u-nav-4"><li class="u-nav-item"><a class="u-button-style u-nav-link" href="WordPress-with-AWS.html">Wordpress with RDS</a>
+</li><li class="u-nav-item"><a class="u-button-style u-nav-link" href="Static-Web-Deployment-with-S3.html">Static Web with S3</a>
+</li><li class="u-nav-item"><a class="u-button-style u-nav-link" href="Backup-Automation.html">Backup Automation</a>
+</li><li class="u-nav-item"><a class="u-button-style u-nav-link" href="Hands-on-Projects.html">Hands-on Projects</a>
+</li></ul>
+</div>
+</li><li class="u-nav-item"><a class="u-button-style u-nav-link" href="https://www.linkedin.com/in/sergiojuradolozano/" target="_blank">Say hi on LinkedIn</a>
+</li></ul>
+              </div>
+            </div>
+            <div class="u-black u-menu-overlay u-opacity u-opacity-70" wfd-invisible="true"></div>
+          </div>
+        </nav>
+      </div></header>
+    <section class="u-align-left u-clearfix u-image u-shading u-section-1" id="sec-12b0" data-image-width="1280" data-image-height="800">
+      <div class="u-clearfix u-sheet u-sheet-1">
+        <div class="u-align-center u-clearfix u-layout-wrap u-layout-wrap-1">
+          <div class="u-gutter-0 u-layout">
+            <div class="u-layout-row">
+              <div class="u-align-left u-container-style u-layout-cell u-left-cell u-shape-rectangle u-size-60 u-layout-cell-1">
+                <div class="u-container-layout u-valign-bottom-xs u-container-layout-1">
+                  <h1 class="u-align-center u-custom-font u-font-merriweather u-text u-text-1">Static Web Deployment with S3 and CloudFront</h1>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+    <section class="u-align-center u-clearfix u-hidden-xs u-lightbox u-palette-4-light-3 u-section-2" id="sec-1157">
+      <div class="u-clearfix u-sheet u-valign-middle u-sheet-1">
+        <h1 class="u-align-center u-custom-font u-font-merriweather u-text u-text-default u-text-1">Serverless Architec​ture</h1>
+        <div class="u-carousel u-carousel-duration-0 u-gallery u-layout-carousel u-lightbox u-no-transition u-show-text-on-hover u-gallery-1" data-interval="5000" data-u-ride="false" id="carousel-9387">
+          <ol class="u-absolute-hcenter u-carousel-indicators u-carousel-indicators-1">
+            <li data-u-target="#carousel-9387" data-u-slide-to="0" class="u-active u-grey-70 u-shape-circle" style="width: 10px; height: 10px;"></li>
+          </ol>
+          <div class="u-carousel-inner u-gallery-inner" role="listbox">
+            <div class="u-active u-carousel-item u-effect-fade u-effect-hover-zoom u-gallery-item u-shape-rectangle u-carousel-item-1">
+              <div class="u-back-slide" data-image-width="898" data-image-height="645">
+                <img class="u-back-image u-expanded u-image-contain u-back-image-1" src="images/S3-Architecture.svg" alt="">
+              </div>
+              <div class="u-over-slide u-palette-2-dark-2 u-over-slide-1">
+                <h3 class="u-align-center u-custom-font u-font-merriweather u-gallery-heading" style="font-size: 1.5rem; line-height: 1;"></h3>
+                <p class="u-align-center u-custom-font u-font-merriweather u-gallery-text" style="line-height: 1; background-image: none;">For this website to load fast, Route 53 routes traffic to the region with the lowest possible latency for the user. Then, CloudFront is used for fast content delivery. The website repository is stored in a private bucket that is routed to the CloudFront distribution. This route allows users to see the content without having access to the bucket containing the website repository.</p>
+              </div>
+            </div>
+          </div>
+          <a class="u-absolute-vcenter u-carousel-control u-carousel-control-prev u-hidden u-icon-circle u-opacity u-opacity-70 u-palette-2-base u-spacing-10 u-text-white u-carousel-control-1" href="#carousel-9387" role="button" data-u-slide="prev">
+            <span aria-hidden="true">
+              <svg viewBox="0 0 451.847 451.847"><path d="M97.141,225.92c0-8.095,3.091-16.192,9.259-22.366L300.689,9.27c12.359-12.359,32.397-12.359,44.751,0
+c12.354,12.354,12.354,32.388,0,44.748L173.525,225.92l171.903,171.909c12.354,12.354,12.354,32.391,0,44.744
+c-12.354,12.365-32.386,12.365-44.745,0l-194.29-194.281C100.226,242.115,97.141,234.018,97.141,225.92z"></path></svg>
+            </span>
+            <span class="sr-only">
+              <svg viewBox="0 0 451.847 451.847"><path d="M97.141,225.92c0-8.095,3.091-16.192,9.259-22.366L300.689,9.27c12.359-12.359,32.397-12.359,44.751,0
+c12.354,12.354,12.354,32.388,0,44.748L173.525,225.92l171.903,171.909c12.354,12.354,12.354,32.391,0,44.744
+c-12.354,12.365-32.386,12.365-44.745,0l-194.29-194.281C100.226,242.115,97.141,234.018,97.141,225.92z"></path></svg>
+            </span>
+          </a>
+          <a class="u-absolute-vcenter u-carousel-control u-carousel-control-next u-hidden u-icon-circle u-opacity u-opacity-70 u-palette-2-base u-spacing-10 u-text-white u-carousel-control-2" href="#carousel-9387" role="button" data-u-slide="next">
+            <span aria-hidden="true">
+              <svg viewBox="0 0 451.846 451.847"><path d="M345.441,248.292L151.154,442.573c-12.359,12.365-32.397,12.365-44.75,0c-12.354-12.354-12.354-32.391,0-44.744
+L278.318,225.92L106.409,54.017c-12.354-12.359-12.354-32.394,0-44.748c12.354-12.359,32.391-12.359,44.75,0l194.287,194.284
+c6.177,6.18,9.262,14.271,9.262,22.366C354.708,234.018,351.617,242.115,345.441,248.292z"></path></svg>
+            </span>
+            <span class="sr-only">
+              <svg viewBox="0 0 451.846 451.847"><path d="M345.441,248.292L151.154,442.573c-12.359,12.365-32.397,12.365-44.75,0c-12.354-12.354-12.354-32.391,0-44.744
+L278.318,225.92L106.409,54.017c-12.354-12.359-12.354-32.394,0-44.748c12.354-12.359,32.391-12.359,44.75,0l194.287,194.284
+c6.177,6.18,9.262,14.271,9.262,22.366C354.708,234.018,351.617,242.115,345.441,248.292z"></path></svg>
+            </span>
+          </a>
+        </div>
+      </div>
+    </section>
+    <section class="u-clearfix u-container-align-center u-lightbox u-palette-4-light-3 u-section-3" id="carousel_e6f6">
+      <div class="u-clearfix u-sheet u-sheet-1">
+        <div class="u-clearfix u-expanded-width u-layout-wrap u-layout-wrap-1">
+          <div class="u-layout">
+            <div class="u-layout-row">
+              <div class="u-container-style u-layout-cell u-size-30 u-layout-cell-1">
+                <div class="u-container-layout u-valign-top-lg u-valign-top-md u-valign-top-sm u-valign-top-xl u-container-layout-1">
+                  <h5 class="u-text u-text-default-lg u-text-default-md u-text-default-sm u-text-default-xl u-text-1">The importance of Content Delivery Network</h5>
+                  <p class="u-large-text u-text u-text-default u-text-variant u-text-2"> A content delivery network locates clustered servers edge locations) regional or globally.
+The servers are used to store webpage objects temporarily, known as cache.&nbsp; AWS provides CloudFront as its CDN. As it can be obseerved in the image, the user is geographicaly far from the bucket, nonetheless with the use of edge locations the user will be connected to the closer edge location. When the user sends the request, if the content (object) is in the cache, the edge location it returns it to the uders, and if not it forwardes the request to the origin server, which wil return it to the edge location and the edge location to the user. At the point in time I am writing this page, AWS has 400+ edge locations.&nbsp;<br>
+                  </p>
+                </div>
+              </div>
+              <div class="u-container-style u-image u-image-contain u-layout-cell u-size-30 u-image-1" data-image-width="683" data-image-height="425">
+                <div class="u-container-layout u-valign-top-sm u-valign-top-xs u-container-layout-2"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+    <section class="u-clearfix u-container-align-center u-palette-4-light-3 u-section-4" id="sec-4560">
+      <div class="u-clearfix u-sheet u-sheet-1">
+        <div class="u-clearfix u-expanded-width u-layout-wrap u-layout-wrap-1">
+          <div class="u-layout" style="">
+            <div class="u-layout-row" style="">
+              <div class="u-container-align-center-xs u-container-style u-layout-cell u-size-30 u-layout-cell-1">
+                <div class="u-container-layout u-valign-bottom-xs u-container-layout-1">
+                  <div class="u-container-style u-expanded-width u-group u-palette-5-light-3 u-group-1">
+                    <div class="u-container-layout u-valign-middle u-container-layout-2">
+                      <div class="u-align-center u-table u-table-responsive u-table-1">
+                        <table class="u-table-entity">
+                          <colgroup>
+                            <col width="50%">
+                            <col width="50%">
+                          </colgroup>
+                          <tbody class="u-align-center u-custom-font u-font-merriweather u-table-body u-table-valign-middle u-table-body-1">
+                            <tr style="height: 33px;">
+                              <td class="u-border-1 u-border-grey-dark-1 u-palette-2-dark-1 u-table-cell u-table-cell-1">Domain name</td>
+                              <td class="u-border-1 u-border-grey-dark-1 u-table-cell">sergiojuradolozano.com</td>
+                            </tr>
+                            <tr style="height: 25px;">
+                              <td class="u-border-1 u-border-grey-dark-1 u-palette-2-dark-1 u-table-cell u-table-cell-3">Alias + Domain&nbsp;</td>
+                              <td class="u-border-1 u-border-grey-dark-1 u-table-cell">www.sergiojuradolozano.com</td>
+                            </tr>
+                            <tr style="height: 32px;">
+                              <td class="u-border-1 u-border-grey-dark-1 u-palette-2-dark-1 u-table-cell u-table-cell-5">Key Algorithm</td>
+                              <td class="u-border-1 u-border-grey-dark-1 u-table-cell">RSA 2048</td>
+                            </tr>
+                            <tr style="height: 25px;">
+                              <td class="u-border-1 u-border-grey-dark-1 u-palette-2-dark-1 u-table-cell u-table-cell-7">Tag Key</td>
+                              <td class="u-border-1 u-border-grey-dark-1 u-table-cell">Name</td>
+                            </tr>
+                            <tr style="height: 35px;">
+                              <td class="u-border-1 u-border-grey-dark-1 u-palette-2-dark-1 u-table-cell u-table-cell-9">Tag Value</td>
+                              <td class="u-border-1 u-border-grey-dark-1 u-table-cell">s3-website-with-cloudfront<br>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="u-container-style u-layout-cell u-palette-1-light-3 u-size-30 u-layout-cell-2">
+                <div class="u-container-layout u-valign-bottom u-container-layout-3">
+                  <h3 class="u-custom-font u-font-montserrat u-text u-text-default-lg u-text-default-md u-text-default-sm u-text-default-xl u-text-palette-2-dark-1 u-text-1">1</h3>
+                  <h5 class="u-text u-text-default u-text-2">Create SSL Certificate</h5>
+                  <p class="u-large-text u-text u-text-default u-text-variant u-text-3"> The domain name that I transferred to Route 53 is in a hosted zone. The identity of this site at this point is not authenticated. For this website to be protected, it requires an SSL certificate. I used AWS Certificate Manager for this project to request a public SSL certificate. When submitting the request, I added the domain with and without the “www” alias and used DNS validation and RSA 2048. After the request was submitted, the CNAME records created on that request needed to be added to Route 53 for the SSL certificate to take effect on the domain. It is essential to mention that although the primary users of this site will be located in the UK, the certificate request needs to be made in the North Virginia Region, otherwise the certificate will not appear in the dropdown menu under Custom SSL certificate on CloudFront (see CloudFront later on).<br>
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+    <section class="u-clearfix u-palette-4-light-3 u-section-5" id="carousel_2c6d">
+      <div class="u-clearfix u-sheet u-sheet-1">
+        <div class="u-clearfix u-expanded-width u-layout-wrap u-layout-wrap-1">
+          <div class="u-layout">
+            <div class="u-layout-row">
+              <div class="u-container-style u-layout-cell u-size-30 u-layout-cell-1">
+                <div class="u-container-layout u-valign-bottom-xs u-container-layout-1">
+                  <h3 class="u-align-left u-custom-font u-font-montserrat u-text u-text-default u-text-palette-2-dark-1 u-text-1">2</h3>
+                  <h5 class="u-align-left u-text u-text-default u-text-2">Create a Private Bucket</h5>
+                  <p class="u-align-left u-large-text u-text u-text-default u-text-variant u-text-3"> Looking at static website architectures using S3, I have noticed that some of them have their repository in public buckets. I would not consider this a good practice for security. Users do not need access to the bucket to view website content following the zero trust and least privilege principles. By using the CloudFront endpoint, users will be able to access content indirectly, as we will see in the next step. As a result, the website would be less exposed to cyberattacks like ransomware.This table shows the main values when setting the S3 bucket.&nbsp;<br>The selected region was London, as it is closest to the expected audience of this website. I gave the name of the bucket my full name and included name tags for monitoring purposes. Bucket Versioning was disabled as this site does not require version control given the minimal changes in content. The bucket is blocked from public access and server-side encryption has been disabled, since enabling SSE-S3 or SSE-KMS might incur charges. Note that if this site contains sensitive data, enabling server-side encryption would be a wise idea.&nbsp;
+                  </p>
+                </div>
+              </div>
+              <div class="u-align-center-xs u-container-style u-layout-cell u-size-30 u-layout-cell-2">
+                <div class="u-container-layout u-valign-top-xs u-container-layout-2">
+                  <div class="u-container-align-center-lg u-container-align-center-md u-container-align-center-sm u-container-align-center-xl u-container-style u-expanded-width u-group u-palette-5-light-3 u-group-1">
+                    <div class="u-container-layout u-valign-middle-lg u-valign-middle-md u-valign-middle-sm u-valign-middle-xl u-valign-top-xs u-container-layout-3">
+                      <div class="u-align-center u-expanded-width-xs u-table u-table-responsive u-table-1">
+                        <table class="u-table-entity">
+                          <colgroup>
+                            <col width="50%">
+                            <col width="50%">
+                          </colgroup>
+                          <tbody class="u-align-center u-custom-font u-font-merriweather u-table-body u-table-valign-middle u-table-body-1">
+                            <tr style="height: 46px;">
+                              <td class="u-border-1 u-border-grey-dark-1 u-palette-2-dark-1 u-table-cell u-table-cell-1">Bucket name</td>
+                              <td class="u-border-1 u-border-grey-dark-1 u-table-cell">sergiojuradolozano</td>
+                            </tr>
+                            <tr style="height: 34px;">
+                              <td class="u-border-1 u-border-grey-dark-1 u-palette-2-dark-1 u-table-cell u-table-cell-3">Region</td>
+                              <td class="u-border-1 u-border-grey-dark-1 u-table-cell">London</td>
+                            </tr>
+                            <tr style="height: 46px;">
+                              <td class="u-border-1 u-border-grey-dark-1 u-palette-2-dark-1 u-table-cell u-table-cell-5">Object Ownership</td>
+                              <td class="u-border-1 u-border-grey-dark-1 u-table-cell"> ACLS disable</td>
+                            </tr>
+                            <tr style="height: 46px;">
+                              <td class="u-border-1 u-border-grey-dark-1 u-palette-2-dark-1 u-table-cell u-table-cell-7">Public Access</td>
+                              <td class="u-border-1 u-border-grey-dark-1 u-table-cell">Block all</td>
+                            </tr>
+                            <tr style="height: 46px;">
+                              <td class="u-border-1 u-border-grey-dark-1 u-palette-2-dark-1 u-table-cell u-table-cell-9">Bucket Versioning</td>
+                              <td class="u-border-1 u-border-grey-dark-1 u-table-cell">Disable</td>
+                            </tr>
+                            <tr style="height: 34px;">
+                              <td class="u-border-1 u-border-grey-dark-1 u-palette-2-dark-1 u-table-cell u-table-cell-11">Tag Key</td>
+                              <td class="u-border-1 u-border-grey-dark-1 u-table-cell">Name</td>
+                            </tr>
+                            <tr style="height: 46px;">
+                              <td class="u-border-1 u-border-grey-dark-1 u-palette-2-dark-1 u-table-cell u-table-cell-13">Tag Value</td>
+                              <td class="u-border-1 u-border-grey-dark-1 u-table-cell">s3-website-with-cloudfront<br>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+    <section class="u-clearfix u-container-align-center u-lightbox u-palette-4-light-3 u-section-6" id="carousel_fa67">
+      <div class="u-clearfix u-sheet u-sheet-1">
+        <div class="u-clearfix u-expanded-width u-layout-wrap u-layout-wrap-1">
+          <div class="u-layout">
+            <div class="u-layout-row">
+              <div class="u-container-style u-layout-cell u-size-30 u-layout-cell-1">
+                <div class="u-container-layout u-valign-bottom u-container-layout-1">
+                  <div class="u-container-align-center-lg u-container-align-center-md u-container-align-center-sm u-container-align-center-xl u-container-style u-expanded-width u-group u-palette-5-light-3 u-group-1">
+                    <div class="u-container-layout u-valign-top-xs u-container-layout-2">
+                      <div class="u-align-center u-expanded-width-xs u-table u-table-responsive u-table-1">
+                        <table class="u-table-entity">
+                          <colgroup>
+                            <col width="50%">
+                            <col width="50%">
+                          </colgroup>
+                          <tbody class="u-align-center u-custom-font u-font-merriweather u-table-body u-table-valign-middle u-table-body-1">
+                            <tr style="height: 46px;">
+                              <td class="u-border-1 u-border-grey-dark-1 u-palette-2-dark-1 u-table-cell u-table-cell-1">Origin domain</td>
+                              <td class="u-border-1 u-border-grey-dark-1 u-table-cell">S3 bucket</td>
+                            </tr>
+                            <tr style="height: 34px;">
+                              <td class="u-border-1 u-border-grey-dark-1 u-palette-2-dark-1 u-table-cell u-table-cell-3">Origin access</td>
+                              <td class="u-border-1 u-border-grey-dark-1 u-table-cell">Origin access control</td>
+                            </tr>
+                            <tr style="height: 46px;">
+                              <td class="u-border-1 u-border-grey-dark-1 u-palette-2-dark-1 u-table-cell u-table-cell-5">Origin access control</td>
+                              <td class="u-border-1 u-border-grey-dark-1 u-table-cell">Created new</td>
+                            </tr>
+                            <tr style="height: 46px;">
+                              <td class="u-border-1 u-border-grey-dark-1 u-palette-2-dark-1 u-table-cell u-table-cell-7">Origin Shield</td>
+                              <td class="u-border-1 u-border-grey-dark-1 u-table-cell">Enable</td>
+                            </tr>
+                            <tr style="height: 46px;">
+                              <td class="u-border-1 u-border-grey-dark-1 u-palette-2-dark-1 u-table-cell u-table-cell-9">Origin Shield region</td>
+                              <td class="u-border-1 u-border-grey-dark-1 u-table-cell">London</td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="u-container-style u-layout-cell u-shape-rectangle u-size-30 u-layout-cell-2">
+                <div class="u-container-layout u-container-layout-3">
+                  <h3 class="u-custom-font u-font-montserrat u-text u-text-default u-text-palette-2-dark-1 u-text-1">3</h3>
+                  <h5 class="u-text u-text-default u-text-2">Set up a CloudFront Distribution</h5>
+                  <p class="u-custom-font u-font-merriweather u-text u-text-default u-text-3"> After requesting the certificate and creating the S3 bucket, I set up the CloudFront distribution to restrict access to CloudFront only. This table shows the main values selected when configuring the distribution. As can be seen, the origin domain is the bucket. At this point, access control needs to be restricted, so only CloudFront can access it. That is the reason why the bucket does not need to be public, and the web hosting option within the bucket settings should be disabled. Note that I created a new control setting as I did not have Origin access control. The newly created policy by AWS needs to be added to the bucket policy (See step 5). Finalising the configuration of CloudFront distribution, I enabled the Origin Shield and selected the region of London. This will protect the availability of the site by reducing duplicate requests for the same content.&nbsp;&nbsp;</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+    <section class="u-clearfix u-container-align-center u-lightbox u-palette-4-light-3 u-section-7" id="carousel_dda4">
+      <div class="u-clearfix u-sheet u-valign-middle-xs u-sheet-1">
+        <div class="u-clearfix u-expanded-width u-layout-wrap u-layout-wrap-1">
+          <div class="u-layout">
+            <div class="u-layout-row">
+              <div class="u-container-align-left u-container-style u-layout-cell u-size-30 u-layout-cell-1">
+                <div class="u-container-layout u-container-layout-1">
+                  <h3 class="u-align-left u-custom-font u-font-montserrat u-text u-text-default u-text-palette-2-dark-1 u-text-1">4</h3>
+                  <h5 class="u-align-left u-text u-text-default u-text-2">S3 Policy</h5>
+                  <p class="u-align-left u-large-text u-text u-text-default u-text-variant u-text-3"> The Launch Template script automates the Auto-Scaling Group functionality. If the running instance fails, the Auto-Scaling group will deploy a new instance from the same launch template to maintain this site highly available. For that reason, the instance needs to be automated to ensure that the LAMP Server and WordPress will be automatically installed in the newly created instance. In the last section of the Launch Template creation, under "Advanced Details", the script that can be seen when clicking on "View Automation Script" is pasted into User Data. Without placing the script in the User Data box, the EC2 instance that the Auto-Scaling group would deploy would not have a LAMP server installed, nor WordPress, and that would have to be manually added, which is time-consuming and not responsive.</p>
+                </div>
+              </div>
+              <div class="u-container-style u-image u-image-contain u-layout-cell u-size-30 u-image-1" data-image-width="888" data-image-height="442">
+                <div class="u-container-layout u-valign-top-sm u-container-layout-2"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+    <section class="u-clearfix u-container-align-center u-lightbox u-palette-4-light-3 u-section-8" id="carousel_b433">
+      <div class="u-clearfix u-sheet u-sheet-1">
+        <div class="u-clearfix u-expanded-width u-layout-wrap u-layout-wrap-1">
+          <div class="u-layout">
+            <div class="u-layout-row">
+              <div class="u-container-style u-layout-cell u-size-30 u-layout-cell-1">
+                <div class="u-container-layout u-container-layout-1">
+                  <h3 class="u-custom-font u-font-montserrat u-text u-text-default u-text-palette-2-dark-1 u-text-1">6</h3>
+                  <h5 class="u-text u-text-default u-text-2">Upload the content</h5>
+                  <p class="u-large-text u-text u-text-default u-text-variant u-text-3"> To redirect traffic from the domain name to the CloudFront
+distribution, I created an A record in the hosted zone with the endpoint of the
+distribution under “Alias”. </p>
+                </div>
+              </div>
+              <div class="u-container-style u-layout-cell u-shape-rectangle u-size-30 u-layout-cell-2">
+                <div class="u-container-layout u-valign-top-xs u-container-layout-2">
+                  <p class="u-large-text u-text u-text-default u-text-variant u-text-4">image cheking sped of my website<br>nslookup -type=txt o-o.myaddr.l.google.com sergiojuradolozano.com<br>
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+    <section class="u-clearfix u-container-align-center u-lightbox u-palette-4-light-3 u-section-9" id="sec-08f9">
+      <div class="u-clearfix u-sheet u-sheet-1">
+        <div class="u-clearfix u-expanded-width u-layout-wrap u-layout-wrap-1">
+          <div class="u-layout">
+            <div class="u-layout-row">
+              <div class="u-container-align-center u-container-style u-image u-image-contain u-layout-cell u-size-30 u-image-1" data-image-width="898" data-image-height="645">
+                <div class="u-container-layout u-valign-bottom-lg u-valign-bottom-md u-valign-bottom-xl u-valign-top-sm u-valign-top-xs u-container-layout-1"></div>
+              </div>
+              <div class="u-container-style u-layout-cell u-size-30 u-layout-cell-2">
+                <div class="u-container-layout u-container-layout-2">
+                  <h5 class="u-align-left-xs u-text u-text-default u-text-1">Optimise Performance</h5>
+                  <p class="u-align-left-xs u-custom-font u-font-merriweather u-text u-text-default u-text-2">As in the case of the<a href="WordPress-with-AWS.html" class="u-active-none u-border-none u-btn u-button-link u-button-style u-hover-none u-none u-text-palette-1-base u-btn-1" target="_blank"> Wordpress with AWS</a>, this project is based on the Free Tier capabilities.&nbsp; Although hosting this site on a S3 bucket has less limitations than the precious project, AWS provides 5GB of free standard storage.&nbsp;&nbsp;<br>The image represent an architecture that would improve the performance of this site. That is one of the reasons why this site is hosted on a a single bucket. There would be case scenarios where by regulatory compliance, data should be
+served from the same country. In such cases, there is the need of creating more
+buckets within the specific regions. As it can be observed in the image, users
+from USA, UK or Germany would be respectively redirected to the bukets that are
+in their respected regions. Lambda@edge function could be trigger with CloudFront
+to redirect http to the buckets in the regions defined in Lambda.<br>
+                    <br>For this site, a single bucket was created in the region of London. There would be case scenarios in which data should be served from the same country by regulation. In such cases, there is the need of creating more buckets within specific regions. In the image, it can be seen that users from the US, UK, or Germany would be directed to the buckets appropriate to their respective regions. Lambda@edge function could be triggered with CloudFront to decouple the content delivery network. Therefore, users will be redirected to the bucket that is in their regions or to the origin if the users ara outside of any of the Buckets.<br>
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+    <section class="u-clearfix u-container-align-center u-palette-4-light-3 u-section-10" id="carousel_385e">
+      <div class="u-clearfix u-sheet u-sheet-1">
+        <div class="u-clearfix u-expanded-width u-layout-wrap u-layout-wrap-1">
+          <div class="u-layout">
+            <div class="u-layout-row">
+              <div class="u-container-align-center u-container-style u-image u-image-contain u-layout-cell u-size-30 u-image-1" data-image-width="899" data-image-height="645">
+                <div class="u-container-layout u-valign-middle-md u-valign-top-sm u-valign-top-xs u-container-layout-1"></div>
+              </div>
+              <div class="u-container-align-left u-container-style u-layout-cell u-size-30 u-layout-cell-2">
+                <div class="u-container-layout u-container-layout-2">
+                  <h3 class="u-align-left u-custom-font u-font-montserrat u-text u-text-default u-text-palette-2-dark-1 u-text-1">7</h3>
+                  <h5 class="u-align-left u-text u-text-default u-text-2">Configuring the Application Load Balancer</h5>
+                  <p class="u-align-left u-large-text u-text u-text-default u-text-variant u-text-3"> Before the creation of the Load Balancer, a Target Group needs to be created in the same VPC. The selected Target Type for the target group is "Instance", and the rest of the configuration is set to default. The performance of this infrastructure would be improved by an Application Load Balancer. In this case, the Load Balancer is set to face the internet with the EC2-Security Group as a security measure. Using Port 80 (HTTP), traffic will be forwarded to the target group that was previously created. When the load balancer is active, it is added to the Auto-Scaling Group. This graph visually represents their functionality.</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+    <section class="u-clearfix u-container-align-center u-lightbox u-palette-4-light-3 u-section-11" id="carousel_d6f5">
+      <div class="u-clearfix u-sheet u-sheet-1">
+        <div class="u-clearfix u-expanded-width u-layout-wrap u-layout-wrap-1">
+          <div class="u-layout">
+            <div class="u-layout-row">
+              <div class="u-container-style u-layout-cell u-size-30 u-layout-cell-1">
+                <div class="u-container-layout u-container-layout-1">
+                  <h3 class="u-custom-font u-font-montserrat u-text u-text-default u-text-palette-2-dark-1 u-text-1">8</h3>
+                  <h5 class="u-text u-text-default u-text-2">Transferring my registered domain to AWS with Route 53<br>
+                    <br>
+                  </h5>
+                  <p class="u-custom-font u-font-merriweather u-text u-text-default u-text-3"> When designing the architecture for this project, I had a registered domain. Therefore, I decided to migrate the DNS service to Amazon 53. This is because it would help users from other regions access this site with low latency, given that AWS has a global network of DNS servers located across the world. To achieve that, I created a hosted zone with my Domain Name and added the endpoint of the Application Load Balancer as the A record for "www.sergiojuradolozano" and "sergiojuradolozano.com" to redirect traffic to the Load Balancer that was configured in the previous step. As can be observed, this image corresponds to the DNS propagation of sergiojuradolozano.com from<a href="https://nicepage.com/k/auction-website-templates" class="u-active-none u-border-none u-btn u-button-link u-button-style u-hover-none u-none u-text-palette-1-base u-btn-1" target="_blank">whatsmydns.net</a>&nbsp;
+                  </p>
+                </div>
+              </div>
+              <div class="u-container-align-center u-container-style u-image u-image-contain u-layout-cell u-size-30 u-image-1" data-image-width="578" data-image-height="460">
+                <div class="u-container-layout u-valign-bottom-lg u-valign-bottom-md u-valign-bottom-xl u-valign-top-sm u-valign-top-xs u-container-layout-2"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+    <section class="u-clearfix u-palette-4-light-3 u-section-12" id="sec-0915">
+      <div class="u-clearfix u-sheet u-sheet-1">
+        <h1 class="u-custom-font u-font-merriweather u-text u-text-default u-title u-text-1">Say hi</h1>
+        <div class="u-clearfix u-expanded-width u-layout-wrap u-layout-wrap-1">
+          <div class="u-layout">
+            <div class="u-layout-row">
+              <div class="u-container-style u-layout-cell u-size-30 u-layout-cell-1">
+                <div class="u-container-layout u-container-layout-1">
+                  <h1 class="u-custom-font u-font-merriweather u-text u-text-2">sergiojuradolozano@hotmail.com</h1>
+                  <p class="u-large-text u-text u-text-default u-text-variant u-text-3"> Thank you for having a look at this project. Working with cloud architectures and their resources is always fun.&nbsp;<br>
+                    <br>I have a question for you. Would you choose S3 over RDS in this example? And why? Let me know on LinkedIn or via email what you think.
+                  </p>
+                  <div class="u-social-icons u-spacing-10 u-social-icons-1">
+                    <a class="u-social-url" target="_blank" data-type="LinkedIn" title="LinkedIn" href="https://www.linkedin.com/in/sergiojuradolozano/"><span class="u-icon u-social-icon u-social-linkedin u-text-palette-4-base u-icon-1"><svg class="u-svg-link" preserveAspectRatio="xMidYMin slice" viewBox="0 0 112 112" style=""><use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#svg-8715"></use></svg><svg class="u-svg-content" viewBox="0 0 112 112" x="0" y="0" id="svg-8715"><circle fill="currentColor" cx="56.1" cy="56.1" r="55"></circle><path fill="#FFFFFF" d="M41.3,83.7H27.9V43.4h13.4V83.7z M34.6,37.9L34.6,37.9c-4.6,0-7.5-3.1-7.5-7c0-4,3-7,7.6-7s7.4,3,7.5,7
+            C42.2,34.8,39.2,37.9,34.6,37.9z M89.6,83.7H76.2V62.2c0-5.4-1.9-9.1-6.8-9.1c-3.7,0-5.9,2.5-6.9,4.9c-0.4,0.9-0.4,2.1-0.4,3.3v22.5
+            H48.7c0,0,0.2-36.5,0-40.3h13.4v5.7c1.8-2.7,5-6.7,12.1-6.7c8.8,0,15.4,5.8,15.4,18.1V83.7z"></path></svg></span>
+                    </a>
+                  </div>
+                  <div class="u-social-icons u-spacing-10 u-social-icons-2">
+                    <a class="u-social-url" target="_blank" data-type="LinkedIn" title="Email" href="sergiojuradolozano@hotmail.com"><span class="u-file-icon u-icon u-social-icon u-social-linkedin u-text-palette-4-base u-icon-2"><img src="images/5.png" alt=""></span>
+                    </a>
+                  </div>
+                  <div class="u-social-icons u-spacing-10 u-social-icons-3">
+                    <a class="u-social-url" target="_blank" data-type="LinkedIn" title="GitHub" href="https://github.com/sergiojuradolozano"><span class="u-file-icon u-icon u-social-icon u-social-linkedin u-text-palette-4-base u-icon-3"><img src="images/6.png" alt=""></span>
+                    </a>
+                  </div>
+                  <div class="u-clearfix u-group-elements u-group-elements-1">
+                    <p class="u-large-text u-text u-text-variant u-text-4">Sergio Jurado Lozano</p>
+                    <p class="u-large-text u-text u-text-default u-text-variant u-text-5"><span class="u-file-icon u-icon"><img src="np://user.desktop.nicepage.com/Site_88594476/images/3177361.png" alt=""></span>London, UK
+                    </p>
+                  </div>
+                </div>
+              </div>
+              <div class="u-container-style u-image u-image-contain u-layout-cell u-size-30 u-image-1" data-image-width="5472" data-image-height="3648">
+                <div class="u-container-layout u-container-layout-2"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+    
+    
+    <footer class="u-clearfix u-footer u-palette-4-light-3" id="sec-2692"><div class="u-clearfix u-sheet u-sheet-1">
+        <a href="https://nicepage.com" class="u-image u-logo u-image-1" data-image-width="1000" data-image-height="625">
+          <img src="images/logo-no-background.svg" class="u-logo-image u-logo-image-1">
+        </a>
+      </div></footer>
+  
+</body></html>
